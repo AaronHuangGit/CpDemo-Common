@@ -73,6 +73,3 @@ dependencies {
     api rootProject.ext.dependencies.arouterApi
     annotationProcessor rootProject.ext.dependencies.arouterCompiler
 }
-repositories {
-    mavenCentral()
-}
