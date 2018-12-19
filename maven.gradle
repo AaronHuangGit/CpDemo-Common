@@ -1,0 +1,79 @@
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+
+private String getProjectExtraProperties(String propertyName, String defaultValue) {
+    if (project.hasProperty(propertyName)) {
+        def propertyValue = project.extensions.extraProperties.get(propertyName)
+        if (propertyValue != null && propertyValue != "") {
+            return propertyValue
+        }
+    }
+    return defaultValue
+}
+
+uploadArchives {
+    repositories.mavenDeployer {
+        name = 'mavenCentralReleaseDeployer'
+        def snapshotRepoUrl = getProjectExtraProperties("snapshotRepoUrl", "http://maven.pyyx.com/nexus/content/repositories/snapshots/")
+        def username = getProjectExtraProperties("username", "admin")
+        def password = getProjectExtraProperties("password", "admin123")
+        snapshotRepository(url: "$snapshotRepoUrl") {
+            authentication(userName: "$username", password: "$password")
+        }
+        def releasesRepoUrl = getProjectExtraProperties("releasesRepoUrl", "http://maven.pyyx.com/nexus/content/repositories/releases/")
+        def releaseUserName = getProjectExtraProperties("releaseUserName", "admin")
+        def releasePassword = getProjectExtraProperties("releasePassword", "admin123") repository(url: releasesRepoUrl) {
+            authentication(userName: releaseUserName, password: releasePassword)
+        }
+        if (project.hasProperty("groupId")) {
+            pom.groupId = groupId
+        }
+        if (project.hasProperty("artifactId")) {
+            pom.artifactId = artifactId
+        }
+        if (project.hasProperty("versions")) {
+            if (!project.hasProperty("release")) {
+                versions += "-SNAPSHOT"
+            }
+            pom.version = versions
+        }
+        pom.packaging = 'aar'
+    }
+}
+task makeServiceDir(type: Copy) {
+    from(project.getBuildDir().getAbsolutePath() + '/intermediates/javac/release/compileReleaseJavaWithJavac/classes') {
+        include('**/iservice/**/*.class')
+    }
+    from(project.getBuildDir().getAbsolutePath() + '/tmp/kotlin-classes/release') {
+        include('**/iservice/**/*.class')
+    }
+    into(project.getBuildDir().getAbsolutePath() + "/iservice") includeEmptyDirs = false
+}
+task sourceJar(type: Jar, dependsOn: ['build', 'makeServiceDir']) {
+    if (project.hasProperty("groupId")) {
+        baseName = artifactId + "-service-" + versions
+        from(project.getBuildDir().getAbsolutePath() + "/iservice") include('**/iservice/**/*.class')
+    }
+}
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId getProjectExtraProperties("groupId", "unknown")
+            artifactId getProjectExtraProperties("artifactId", "unknown") + "-service"
+            version getProjectExtraProperties("versions", "unknown") artifact(sourceJar)
+        }
+    }
+    repositories {
+        maven {
+            def releasesRepoUrl = getProjectExtraProperties("releasesRepoUrl", "http://maven.pyyx.com/nexus/content/repositories/releases/")
+            def snapshotRepoUrl = getProjectExtraProperties("snapshotRepoUrl", "http://maven.pyyx.com/nexus/content/repositories/snapshots/")
+            def releaseUserName = getProjectExtraProperties("releaseUserName", "admin")
+            def releasePassword = getProjectExtraProperties("releasePassword", "admin123")
+            url = project.hasProperty('release') ? releasesRepoUrl : snapshotRepoUrl
+            credentials {
+                username releaseUserName
+                password releasePassword
+            }
+        }
+    }
+}

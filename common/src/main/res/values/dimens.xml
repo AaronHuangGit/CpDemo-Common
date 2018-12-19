@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="imagesize_action_bar_icon">18dp</dimen>
+    <dimen name="action_bar_height">48dp</dimen>
+    <dimen name="action_bar_padding_left_right">4dp</dimen>
+    <dimen name="action_bar_title_textsize">16dp</dimen>
+    <dimen name="action_bar_subtitle_textsize">12dp</dimen>
+    <dimen name="action_bar_action_item_size">32dp</dimen>
+    <dimen name="appToolbarActionItemSize">32dp</dimen>
+    <dimen name="appToolbarActionItemStudySize">47dp</dimen>
+    <dimen name="mainHomeToolbarActionItemSize">40dp</dimen>
+    <dimen name="appToolbarActionItemMarginStart">8dp</dimen>
+    <dimen name="appToolbarActionItemTextSize">14sp</dimen>
+
+</resources>

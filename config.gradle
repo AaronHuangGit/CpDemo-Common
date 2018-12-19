@@ -1,0 +1,59 @@
+ext {
+    isAloneRun = false
+    android = [
+            hostApplicationId     : 'com.android.demos',
+            frescoApplicationId   : 'com.aaron.demo.fresco',
+            commonApplicationId   : 'com.aaron.demo.common',
+            compileSdkVersion     : 28,
+            buildToolsVersion     : '28.0.3',
+            minSdkVersion         : 18,
+            targetSdkVersion      : 26,
+            versionCode           : 1,
+            versionName           : 'v 1.1.0',
+            gradleBuildToolVersion: '3.0.1'
+    ]
+
+    libsVersion = [
+            supportCommonLibrary   : "27.1.1",
+            supportConstraintLayout: "1.1.2",
+            kotlinVersion          : "1.3.0",
+            anko                   : "0.10.4",
+            componentImageLoader   : "1.0.1",
+            componentMap           : "1.0.2",
+            componentGson          : "1.0",
+            componentUtil          : "1.3",
+            componentNetwork       : "3.3",
+            supportMultidex        : "1.0.2",
+            uiSwipebackLayout      : "1.1.0",
+            eventBus               : "3.1.1",
+            uiSystembartint        : "1.0.3",
+            arouterApi             : "1.4.1",
+            arouterCompiler        : "1.2.2"
+    ]
+
+    dependencies = [
+            kotlinStdlibJdk7         : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.libsVersion.kotlinVersion",
+            anko                     : "org.jetbrains.anko:anko-commons:$rootProject.libsVersion.anko",
+            ankoSdk25                : "org.jetbrains.anko:anko-sdk25:$rootProject.libsVersion.anko",
+            ankoAppcompatV7          : "org.jetbrains.anko:anko-appcompat-v7:$rootProject.libsVersion.anko",
+            ankoSdk25Coroutines      : "org.jetbrains.anko:anko-sdk25-coroutines:$rootProject.libsVersion.anko",
+            ankoAppcompatV7Coroutines: "org.jetbrains.anko:anko-appcompat-v7-coroutines:$rootProject.libsVersion.anko",
+            supportAppCompatV7       : "com.android.support:appcompat-v7:$rootProject.libsVersion.supportCommonLibrary",
+            supportConstraintLayout  : "com.android.support.constraint:constraint-layout:$rootProject.libsVersion.supportConstraintLayout",
+            supportMultidex          : "com.android.support:multidex:$rootProject.libsVersion.supportMultidex",
+            supportDesign            : "com.android.support:design:$rootProject.libsVersion.supportCommonLibrary",
+            supportV4                : "com.android.support:support-v4:$rootProject.libsVersion.supportCommonLibrary",
+            supportAnnotations       : "com.android.support:support-annotations:$rootProject.libsVersion.supportCommonLibrary",
+            supportCardViewV7        : "com.android.support:cardview-v7:$rootProject.libsVersion.supportCommonLibrary",
+            componentImageLoader     : "com.yueren.library:imageloader:$rootProject.libsVersion.componentImageLoader",
+            componentMap             : "com.yueren.library:map:$rootProject.libsVersion.componentMap",
+            componentUtil            : "com.yueren.library:util:$rootProject.libsVersion.componentUtil",
+            componentNetwork         : "com.yueren.library:network:$rootProject.libsVersion.componentNetwork",
+            componentGson            : "com.yueren.library:gson:$rootProject.libsVersion.componentGson",
+            uiSwipebacklayout        : "me.imid.swipebacklayout.lib:library:$rootProject.libsVersion.uiSwipebackLayout",
+            eventBus                 : "org.greenrobot:eventbus:$rootProject.libsVersion.eventBus",
+            uiSystembartint          : "com.readystatesoftware.systembartint:systembartint:$rootProject.libsVersion.uiSystembartint",
+            arouterApi               : "com.alibaba:arouter-api:$rootProject.libsVersion.arouterApi",
+            arouterCompiler          : "com.alibaba:arouter-compiler:$rootProject.libsVersion.arouterCompiler"
+    ]
+}

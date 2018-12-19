@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary_color">@android:color/white</color>
+    <color name="fresco_press_overly_color">#70000000</color>
+    <color name="colorPrimary">#87CEFA</color>
+    <color name="colorPrimaryDark">#00BFFF</color>
+    <color name="colorTransparent">#00000000</color>
+    <color name="colorWhite">#ffffffff</color>
+    <color name="colorBlack">#ff000000</color>
+    <color name="statusBar">#dedede</color>
+</resources>

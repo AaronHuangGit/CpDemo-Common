@@ -1,0 +1,78 @@
+apply from: 'http://championai.com/android/gradle/commonLibrary.gradle'
+apply plugin: 'kotlin-kapt'
+
+android {
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java']
+            aidl.srcDirs = ['src/main/java']
+            res.srcDirs = ['src/main/res']
+            assets.srcDirs = ['src/main/assets']
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    buildTypes {
+        def STRING = "String"
+        def BOOLEAN = "boolean"
+        def TEST_MODE = "TEST_MODE"
+        def APP_FLAG = "APP_FLAG"
+        def HTTP_HOST = "HTTP_HOST"
+        def TRUE = "true"
+        def FALSE = "false"
+        def appFlag = "\"SemkeDemo\""
+        release {
+            buildConfigField BOOLEAN, TEST_MODE, FALSE
+            buildConfigField STRING, APP_FLAG, appFlag
+            buildConfigField STRING, HTTP_HOST, "\"http://room.likingfit.com\""
+        }
+        debug {
+            buildConfigField BOOLEAN, TEST_MODE, TRUE
+            buildConfigField STRING, APP_FLAG, appFlag
+            buildConfigField STRING, HTTP_HOST, "\"http://testroom.likingfit.com\""
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+}
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api rootProject.ext.dependencies.kotlinStdlibJdk7
+    api rootProject.ext.dependencies.supportAppCompatV7
+    api rootProject.ext.dependencies.supportConstraintLayout
+    api rootProject.ext.dependencies.supportMultidex
+    api rootProject.ext.dependencies.supportDesign
+    api rootProject.ext.dependencies.supportV4
+    api rootProject.ext.dependencies.supportAnnotations
+    api rootProject.ext.dependencies.supportCardViewV7
+    api rootProject.ext.dependencies.componentImageLoader
+    api rootProject.ext.dependencies.componentGson
+    api(rootProject.ext.dependencies.componentMap) {
+        exclude group: 'com.android.support'
+    }
+    api(rootProject.ext.dependencies.componentUtil) {
+        exclude group: 'com.android.support'
+    }
+    api(rootProject.ext.dependencies.componentNetwork) {
+        exclude group: 'com.android.support'
+        exclude group: 'com.google.code.gson'
+    }
+    api rootProject.ext.dependencies.uiSwipebacklayout
+    api rootProject.ext.dependencies.uiSystembartint
+    api rootProject.ext.dependencies.arouterApi
+    annotationProcessor rootProject.ext.dependencies.arouterCompiler
+}
+repositories {
+    mavenCentral()
+}
